@@ -71,11 +71,12 @@ export const CustomerListResults = ({ characters, ...rest }) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Nombre</TableCell>
-                <TableCell>Apellido</TableCell>
-                <TableCell>Nombre Completo</TableCell>
-                <TableCell>Titulo</TableCell>
+                <TableCell>First Name</TableCell>
+                <TableCell>Last Name</TableCell>
+                <TableCell>Full Name</TableCell>
                 <TableCell>avatar</TableCell>
+                <TableCell>Title</TableCell>
+                <TableCell>ID</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -104,6 +105,7 @@ export const CustomerListResults = ({ characters, ...rest }) => {
                   <TableCell>{character.fullName}</TableCell>
                   <TableCell>{character.title}</TableCell>
                   <TableCell>{character.image}</TableCell>
+                  <TableCell>{character.id}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
