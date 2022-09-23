@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
+import { useState } from "react";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import PropTypes from "prop-types";
+import { format } from "date-fns";
 import {
   Avatar,
   Box,
@@ -13,11 +13,13 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  Typography
-} from '@mui/material';
-import { getInitials } from '../../utils/get-initials';
+  Typography,
+} from "@mui/material";
+import { getInitials } from "../../utils/get-initials";
+import { useQuery } from "react-query";
+import axios from "axios";
 
-export const CustomerListResults = ({ customers, ...rest }) => {
+export const CustomerListResults = ({ characters, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
@@ -69,100 +71,49 @@ export const CustomerListResults = ({ customers, ...rest }) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell padding="checkbox">
-                  <Checkbox
-                    checked={selectedCustomerIds.length === customers.length}
-                    color="primary"
-                    indeterminate={
-                      selectedCustomerIds.length > 0
-                      && selectedCustomerIds.length < customers.length
-                    }
-                    onChange={handleSelectAll}
-                  />
-                </TableCell>
-                <TableCell>
-                  Name
-                </TableCell>
-                <TableCell>
-                  Email
-                </TableCell>
-                <TableCell>
-                  Location
-                </TableCell>
-                <TableCell>
-                  Phone
-                </TableCell>
-                <TableCell>
-                  Registration date
-                </TableCell>
+                <TableCell>Nombre</TableCell>
+                <TableCell>Apellido</TableCell>
+                <TableCell>Nombre Completo</TableCell>
+                <TableCell>Titulo</TableCell>
+                <TableCell>avatar</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {customers.slice(0, limit).map((customer) => (
+              {characters.slice(0, limit).map((character) => (
                 <TableRow
                   hover
-                  key={customer.id}
-                  selected={selectedCustomerIds.indexOf(customer.id) !== -1}
+                  key={character.id}
+                  selected={selectedCustomerIds.indexOf(character.id) !== -1}
                 >
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      checked={selectedCustomerIds.indexOf(customer.id) !== -1}
-                      onChange={(event) => handleSelectOne(event, customer.id)}
-                      value="true"
-                    />
-                  </TableCell>
                   <TableCell>
                     <Box
                       sx={{
-                        alignItems: 'center',
-                        display: 'flex'
+                        alignItems: "center",
+                        display: "flex",
                       }}
                     >
-                      <Avatar
-                        src={customer.avatarUrl}
-                        sx={{ mr: 2 }}
-                      >
-                        {getInitials(customer.name)}
+                      <Avatar src={character.imageUrl} sx={{ mr: 2 }}>
+                        {getInitials(character.firstName)}
                       </Avatar>
-                      <Typography
-                        color="textPrimary"
-                        variant="body1"
-                      >
-                        {customer.name}
+                      <Typography color="textPrimary" variant="body1">
+                        {character.firstName}
                       </Typography>
                     </Box>
                   </TableCell>
-                  <TableCell>
-                    {customer.email}
-                  </TableCell>
-                  <TableCell>
-                    {`${customer.address.city}, ${customer.address.state}, ${customer.address.country}`}
-                  </TableCell>
-                  <TableCell>
-                    {customer.phone}
-                  </TableCell>
-                  <TableCell>
-                    {format(customer.createdAt, 'dd/MM/yyyy')}
-                  </TableCell>
+                  <TableCell>{character.lastName}</TableCell>
+                  <TableCell>{character.fullName}</TableCell>
+                  <TableCell>{character.title}</TableCell>
+                  <TableCell>{character.image}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </Box>
       </PerfectScrollbar>
-      <TablePagination
-        component="div"
-        count={customers.length}
-        onPageChange={handlePageChange}
-        onRowsPerPageChange={handleLimitChange}
-        page={page}
-        rowsPerPage={limit}
-        rowsPerPageOptions={[5, 10, 25]}
-      />
     </Card>
   );
 };
 
 CustomerListResults.propTypes = {
-  customers: PropTypes.array.isRequired
+  customers: PropTypes.array.isRequired,
 };
