@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import PropTypes from "prop-types";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { format } from "date-fns";
 import {
   Avatar,
@@ -16,8 +17,6 @@ import {
   Typography,
 } from "@mui/material";
 import { getInitials } from "../../utils/get-initials";
-import { useQuery } from "react-query";
-import axios from "axios";
 
 export const CustomerListResults = ({ characters, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
@@ -74,9 +73,11 @@ export const CustomerListResults = ({ characters, ...rest }) => {
                 <TableCell>First Name</TableCell>
                 <TableCell>Last Name</TableCell>
                 <TableCell>Full Name</TableCell>
-                <TableCell>avatar</TableCell>
                 <TableCell>Title</TableCell>
+                <TableCell>Family</TableCell>
+                <TableCell>Avatar</TableCell>
                 <TableCell>ID</TableCell>
+                <TableCell> </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -104,8 +105,16 @@ export const CustomerListResults = ({ characters, ...rest }) => {
                   <TableCell>{character.lastName}</TableCell>
                   <TableCell>{character.fullName}</TableCell>
                   <TableCell>{character.title}</TableCell>
+                  <TableCell>{character.family}</TableCell>
                   <TableCell>{character.image}</TableCell>
                   <TableCell>{character.id}</TableCell>
+                  <TableCell>
+                    <RemoveRedEyeIcon
+                      sx={{
+                        cursor: "pointer",
+                      }}
+                    />
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
