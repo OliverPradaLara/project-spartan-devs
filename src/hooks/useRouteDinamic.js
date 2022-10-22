@@ -1,16 +1,18 @@
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery} from "react-query";
 import axios from "axios";
 
-const fetchCharacter = (characterId) =>{
+const getCharacter = ({queryKey}) =>{
+  const characterId = queryKey[1]
+  console.log("desde la funcion", characterId)
 return axios.get(`https://thronesapi.com/api/v2/Characters/${characterId}`) 
 }
 
 export const useRouteDinamic = (characterId) => {
 
-  const queryClient = useQueryClient()
+
 
   return (
-    useQuery(["character" , characterId],()=> fetchCharacter(characterId),{select:({data})=> data})
+    useQuery(["character" , characterId],getCharacter ,{select:(response)=>response.data})
     
   )
 }

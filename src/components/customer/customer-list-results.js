@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import { getInitials } from "../../utils/get-initials";
 import Link from "next/link";
-import { characterId } from "../../pages/[characterId]/character";
+
 
 export const CustomerListResults = ({ characters, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
@@ -111,7 +111,7 @@ export const CustomerListResults = ({ characters, ...rest }) => {
                   <TableCell>{character.image}</TableCell>
                   <TableCell>{character.id}</TableCell>
                   <TableCell>
-                   <Link href={`/characterId`}>
+                   <Link href={`/character/${character.id}`}>
                     <RemoveRedEyeIcon sx={{
                       cursor:"pointer"
                     }}/>
