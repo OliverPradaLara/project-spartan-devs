@@ -35,10 +35,11 @@ const Character = () => {
 
      <Card sx={{ 
       width: "40%",
-      height:"80%"
+      height:"90%",
+      
      }}>
           <CardActionArea sx={{
-            height:"60%",
+            height:"55%",
             width:"100%"
           }}>
             <CardMedia sx={{
@@ -56,16 +57,21 @@ const Character = () => {
                { data.fullName}
               </Typography>
               <Box sx={{
-                height:"70%"
+                height:"100%",
+                display:"flex",
+                flexDirection:"column",
+                gap:"10px"
+
               }}>
-                <Box>{data.id}</Box>
-                <Box>{data.title}</Box>
-                <Box>{data.family}</Box>
+                <Box> <h3>ID:</h3> {data.id}</Box>
+                <Box> <h3>Titulo:</h3> {data.title}</Box>
+                <Box> <h3>Familia:</h3> {data.family}</Box>
               </Box>
           <CardActions>
 
             <Button size="small" sx={{
-              width:"100%"
+              width:"100%",
+              
             }}  >
             <Link href="/customers">
               Atrás
