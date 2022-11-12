@@ -3,12 +3,12 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 
 /* hook para la peticion de datos */
 
-const getCharacters = async () => {
+const getUsers = async () => {
   return await axios.get("https://immense-shelf-01877.herokuapp.com/users");
 };
 
-export const useGetCharacters = () => {
-  return useQuery(["characters"], getCharacters, {
+export const useGetUsers = () => {
+  return useQuery(["users"], getUsers, {
     onSucces: (success) => {
       return console.log("se cargaron de manera exitosa los caracteres");
     },
@@ -23,13 +23,13 @@ export const useGetCharacters = () => {
 
 /* Hook llamada by ID */
 
-const getCharacter = async ({ queryKey }) => {
-  const characterId = queryKey[1];
-  return await axios.get(`https://immense-shelf-01877.herokuapp.com/users/${characterId}`);
+const getUser = async ({ queryKey }) => {
+  const userId = queryKey[1];
+  return await axios.get(`https://immense-shelf-01877.herokuapp.com/users/${userId}`);
 };
 
-export const useGetCharacter = (characterId) => {
-  return useQuery(["characters", characterId], getCharacter, {
+export const useGetUser = (userId) => {
+  return useQuery(["users", userId], getUser, {
     onSucces: (success) => {
       return console.log("se cargaron de manera exitosa los caracteres");
     },
@@ -44,55 +44,55 @@ export const useGetCharacter = (characterId) => {
 
 /* hook para añadir users */
 
-const createCharacter = (dataCharacter) => {
-  return axios.post("https://immense-shelf-01877.herokuapp.com/users", dataCharacter);
+const createUser = (dataUser) => {
+  return axios.post("https://immense-shelf-01877.herokuapp.com/users", dataUser);
 };
 
 /* funcion para exportar el hook para añadir a a la base de datos*/
-export const useCreateCharacter = () => {
+export const useCreateUser = () => {
   /* funcion usando el useQuery Mutation*/
   const queryClient = useQueryClient();
-  return useMutation(createCharacter, {
+  return useMutation(createUser, {
     onSuccess: () => {
-      queryClient.invalidateQueries("characters");
-      return console.log("wass a exit from useCreateCharacters");
+      queryClient.invalidateQueries("Users");
+      return console.log("wass a exit from useCreateUser");
     },
     onError: () => {
-      return console.log("that was error from useCreateCharacters");
+      return console.log("that was error from useCreateUser");
     },
   });
 };
 
 /* Hook para borrar users de la db */
 
-const deleteCharacter = async (characterId) => {
-  return await axios.delete(`https://immense-shelf-01877.herokuapp.com/users/${characterId}`);
+const deleteUser = async (userId) => {
+  return await axios.delete(`https://immense-shelf-01877.herokuapp.com/users/${userId}`);
 };
 
-export const useDeleteCharacter = () => {
+export const useDeleteUser = () => {
   const queryClient = useQueryClient();
-  return useMutation(deleteCharacter, {
+  return useMutation(deleteUser, {
     onSuccess: () => {
-      queryClient.invalidateQueries("characters");
-      return console.log("wass a exit from useDeleteCharacter");
+      queryClient.invalidateQueries("users");
+      return console.log("wass a exit from useDeleteUser");
     },
     onError: () => {
-      return console.log("that was error from useDeleteCharacter");
+      return console.log("that was error from useDeleteUser");
     },
   });
 };
 
 /* Hook modificador */
 
-const updateCharacter = async (characterId) => {
-  return await axios.patch(`https://immense-shelf-01877.herokuapp.com/users/${characterId}`);
+const updateCharacter = async (userId) => {
+  return await axios.patch(`https://immense-shelf-01877.herokuapp.com/users/${userId}`);
 };
 
 export const useUpdateCharacter = () => {
   const queryClient = useQueryClient();
   return useMutation(updateCharacter, {
     onSuccess: () => {
-      queryClient.invalidateQueries("characters");
+      queryClient.invalidateQueries("users");
       return console.log("wass a exit from useDeleteCharacter");
     },
     onError: () => {

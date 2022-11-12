@@ -8,10 +8,10 @@ import {
   ButtonGroup,
 } from "@mui/material";
 import { useState } from "react";
-import { useCreateCharacter } from "../../hooks/useCharacters";
+import { useCreateUser } from "../../hooks/useUsers";
 
-export const CharacterForm = ({ dataCharacter }) => {
-  console.log("revisando el datacharacter", dataCharacter);
+export const UserForm = ({ dataUser }) => {
+  console.log("revisando el datacharacter", dataUser);
   /* estados de los inputs */
   const [name, setName] = useState("");
 
@@ -25,15 +25,15 @@ export const CharacterForm = ({ dataCharacter }) => {
 
   /* Funcion para añadir a la db con reactquery */
 
-  const { mutate } = useCreateCharacter();
+  const { mutate } = useCreateUser();
 
   /* funcion del submit */
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newUser = { name, email, city, username, website };
-    mutate(newUser);
+    const dataUser = { name, email, city, username, website };
+    mutate(dataUser);
 
     /*Validacion para setear el formulario*/
     setName("");
@@ -42,7 +42,7 @@ export const CharacterForm = ({ dataCharacter }) => {
     setUsername("");
     setWebsite("");
 
-    console.log(newUser);
+    console.log(dataUser);
   };
 
   return (

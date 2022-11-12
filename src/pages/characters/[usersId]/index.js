@@ -5,8 +5,8 @@ import { Character } from "../../../components/characterList/character";
 
 const CharacterDetails = () => {
   const router = useRouter();
-  const { characterId } = router.query;
-  const { data, isLoading } = useGetCharacter(characterId);
+  const { userId } = router.query;
+  const { data, isLoading } = useGetUser(userId);
   if (isLoading) {
     return <h1>loading</h1>;
   }

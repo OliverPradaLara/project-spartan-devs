@@ -9,17 +9,17 @@ import {
   ButtonGroup,
   Button,
 } from "@mui/material";
-import { useGetCharacters, useDeleteCharacter } from "../../hooks/useCharacters";
+import { useGetUsers, useDeleteUser } from "../../hooks/useUsers";
 import Link from "next/link";
 
 export const Crud = () => {
   /* useCrudDelete */
 
-  const { mutate } = useDeleteCharacter();
+  const { mutate } = useDeleteUser();
 
   /* useQuery hook (get) */
 
-  const { data, isLoading, isError, error } = useGetCharacters();
+  const { data, isLoading, isError, error } = useGetUsers();
 
   /* manejando el loading */
 
@@ -80,52 +80,52 @@ export const Crud = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((person) => (
-              <TableRow hover key={person.id}>
-                <TableCell>{person.id}</TableCell>
+            {data.map((user) => (
+              <TableRow hover key={user.id}>
+                <TableCell>{user.id}</TableCell>
                 <TableCell>
                   <Typography color="textPrimary" variant="body1">
-                    {person.name}
+                    {user.name}
                   </Typography>
                 </TableCell>
                 <TableCell>
                   {" "}
                   <Typography color="textPrimary" variant="body1">
-                    {person.email}
+                    {user.email}
                   </Typography>
                 </TableCell>
                 <TableCell>
                   {" "}
                   <Typography color="textPrimary" variant="body1">
-                    {person.city}
+                    {user.city}
                   </Typography>
                 </TableCell>
                 <TableCell>
                   {" "}
                   <Typography color="textPrimary" variant="body1">
-                    {person.username}
+                    {user.username}
                   </Typography>
                 </TableCell>
                 <TableCell>
                   {" "}
                   <Typography color="textPrimary" variant="body1">
-                    {person.website}
+                    {user.website}
                   </Typography>
                 </TableCell>
                 <TableCell>
                   <Button
                     color="warning"
                     variant="contained"
-                    onClick={<Link href={`/characters/${person.id}`}></Link>}
+                    onClick={<Link href={`/characters/${user.id}`}></Link>}
                   >
                     Edit
                   </Button>
 
-                  <Button color="error" variant="contained" onClick={(e) => mutate(person.id)}>
+                  <Button color="error" variant="contained" onClick={(e) => mutate(user.id)}>
                     Delete
                   </Button>
 
-                  <Link href={`/characters/${person.id}`}>Details</Link>
+                  <Link href={`/characters/${user.id}`}>Details</Link>
                 </TableCell>
               </TableRow>
             ))}

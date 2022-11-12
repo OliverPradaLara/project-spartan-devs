@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material";
-import { CharacterForm } from "../../components/characterList/characterForm";
-import { Crud } from "../../components/characterList/Crud";
+import { Crud } from "../../components/userList/Crud";
+import { UserForm } from "../../components/userList/userForm";
 
 const Page = () => {
   return (
@@ -14,7 +14,7 @@ const Page = () => {
       }}
     >
       <Crud />
-      <CharacterForm />
+      <UserForm />
     </Stack>
   );
 };
