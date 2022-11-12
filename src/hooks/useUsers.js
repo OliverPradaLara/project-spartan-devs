@@ -54,7 +54,7 @@ export const useCreateUser = () => {
   const queryClient = useQueryClient();
   return useMutation(createUser, {
     onSuccess: () => {
-      queryClient.invalidateQueries("Users");
+      queryClient.invalidateQueries("users");
       return console.log("wass a exit from useCreateUser");
     },
     onError: () => {

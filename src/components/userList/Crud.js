@@ -125,7 +125,7 @@ export const Crud = () => {
                     Delete
                   </Button>
 
-                  <Link href={`/characters/${user.id}`}>Details</Link>
+                  <Link href={`/users/${user.id}`}>Details</Link>
                 </TableCell>
               </TableRow>
             ))}
