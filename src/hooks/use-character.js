@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 
 const getCharacters = async () => {
   return await axios.get("https://thronesapi.com/api/v2/Characters");

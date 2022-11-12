@@ -10,7 +10,8 @@
     "start": "next start",
     "export": "next export",
     "lint": "next lint",
-    "lint-fix": "next lint --fix"
+    "lint-fix": "next lint --fix",
+    "server-json": "json-server --watch db.json --port 4000"
   },
   "dependencies": {
     "@emotion/cache": "11.10.3",
@@ -27,6 +28,7 @@
     "chart.js": "3.9.1",
     "date-fns": "2.29.3",
     "formik": "2.2.9",
+    "json-server": "^0.17.1",
     "next": "12.3.0",
     "nprogress": "0.2.0",
     "prop-types": "15.8.1",
