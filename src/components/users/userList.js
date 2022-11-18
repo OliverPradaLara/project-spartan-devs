@@ -9,39 +9,11 @@ import {
   ButtonGroup,
   Button,
 } from "@mui/material";
-import { useGetUsers, useDeleteUser } from "../../hooks/useUsers";
+import { useDeleteUser } from "../../hooks/useUsers";
 import Link from "next/link";
 
-export const Crud = () => {
-  /* useCrudDelete */
-
+export const UserList = ({ dataUserList }) => {
   const { mutate } = useDeleteUser();
-
-  /* useQuery hook (get) */
-
-  const { data, isLoading, isError, error } = useGetUsers();
-
-  /* manejando el loading */
-
-  if (isLoading) {
-    return (
-      <Typography
-        variant="h1"
-        color="initial"
-        sx={{
-          textAlign: "center",
-        }}
-      >
-        is loading
-      </Typography>
-    );
-  }
-
-  /* manejando el error */
-
-  if (isError) {
-    return <Typography variant="h1">{error.message}</Typography>;
-  }
 
   return (
     <Box
@@ -80,7 +52,7 @@ export const Crud = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((user) => (
+            {dataUserList.map((user) => (
               <TableRow hover key={user.id}>
                 <TableCell>{user.id}</TableCell>
                 <TableCell>
@@ -113,19 +85,23 @@ export const Crud = () => {
                   </Typography>
                 </TableCell>
                 <TableCell>
-                  <Button
-                    color="warning"
-                    variant="contained"
-                    onClick={<Link href={`/characters/${user.id}`}></Link>}
-                  >
-                    Edit
-                  </Button>
+                  <ButtonGroup>
+                    <Link href={`/users/${user.id}/edit`}>
+                      <Button color="warning" variant="contained">
+                        Edit
+                      </Button>
+                    </Link>
 
-                  <Button color="error" variant="contained" onClick={(e) => mutate(user.id)}>
-                    Delete
-                  </Button>
+                    <Link href={`/users/${user.id}`}>
+                      <Button color="primary" variant="contained">
+                        details
+                      </Button>
+                    </Link>
 
-                  <Link href={`/users/${user.id}`}>Details</Link>
+                    <Button color="error" variant="contained" onClick={(e) => mutate(user.id)}>
+                      Delete
+                    </Button>
+                  </ButtonGroup>
                 </TableCell>
               </TableRow>
             ))}

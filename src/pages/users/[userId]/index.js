@@ -1,6 +1,6 @@
 import { useGetUser } from "../../../hooks/useUsers";
 import { useRouter } from "next/router";
-import { User } from "../../../components/userList/user";
+import { UserDetail } from "../../../components/users/userDetail";
 
 const UserDetails = () => {
   const router = useRouter();
@@ -11,7 +11,7 @@ const UserDetails = () => {
   }
   return (
     <>
-      <User dataUser={data} />
+      <UserDetail dataUser={data} />
     </>
   );
 };

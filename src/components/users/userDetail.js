@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import React from "react";
 
-export const User = ({ dataUser }) => {
+export const UserDetail = ({ dataUser }) => {
   const { name, email, city, username, website } = dataUser;
   return (
     <>

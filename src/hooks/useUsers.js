@@ -84,16 +84,16 @@ export const useDeleteUser = () => {
 
 /* Hook modificador */
 
-const updateCharacter = async (userId) => {
-  return await axios.patch(`https://immense-shelf-01877.herokuapp.com/users/${userId}`);
+const updateUser = async (user) => {
+  return await axios.put(`https://immense-shelf-01877.herokuapp.com/users/${user.id}`, user);
 };
 
-export const useUpdateCharacter = () => {
+export const useUpdateUser = () => {
   const queryClient = useQueryClient();
-  return useMutation(updateCharacter, {
+  return useMutation(updateUser, {
     onSuccess: () => {
       queryClient.invalidateQueries("users");
-      return console.log("wass a exit from useDeleteCharacter");
+      return console.log("wass a exit from useDeleteUsers");
     },
     onError: () => {
       return console.log("that was error from useDeleteCharacter");

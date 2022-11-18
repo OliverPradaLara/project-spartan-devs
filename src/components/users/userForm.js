@@ -8,41 +8,41 @@ import {
   ButtonGroup,
 } from "@mui/material";
 import { useState } from "react";
-import { useCreateUser } from "../../hooks/useUsers";
+import { useCreateUser, useUpdateUser } from "../../hooks/useUsers";
 
-export const UserForm = ({ dataUser }) => {
-  console.log("revisando el datacharacter", dataUser);
+export const UserForm = ({ userData }) => {
   /* estados de los inputs */
-  const [name, setName] = useState("");
-
-  const [email, setEmail] = useState("");
-
-  const [city, setCity] = useState("");
-
-  const [username, setUsername] = useState("");
-
-  const [website, setWebsite] = useState("");
-
+  const [user, setUser] = useState({
+    name: userData?.name,
+    email: userData?.email,
+    city: userData?.city,
+    username: userData?.username,
+    website: userData?.website,
+  });
+  const { name, email, city, username, website } = user;
   /* Funcion para añadir a la db con reactquery */
 
-  const { mutate } = useCreateUser();
-
+  const { mutate: mutateCreateUser } = useCreateUser();
+  const { mutate: mutateUpdateUser } = useUpdateUser();
   /* funcion del submit */
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (userData?.id) {
+      user.id = userData.id;
+      mutateUpdateUser(user);
+    } else {
+      mutateCreateUser(user);
+    }
+  };
 
-    const dataUser = { name, email, city, username, website };
-    mutate(dataUser);
+  const handleChange = (e) => {
+    let property = e.target.name;
 
-    /*Validacion para setear el formulario*/
-    setName("");
-    setEmail("");
-    setCity("");
-    setUsername("");
-    setWebsite("");
-
-    console.log(dataUser);
+    setUser({
+      ...user,
+      [property]: e.target.value,
+    });
   };
 
   return (
@@ -79,7 +79,7 @@ export const UserForm = ({ dataUser }) => {
             }}
           >
             <InputLabel htmlFor="name">Your Name</InputLabel>
-            <Input id="name" value={name} onChange={(e) => setName(e.target.value)} />
+            <Input id="name" name="name" value={name} onChange={handleChange} />
           </FormControl>
           <FormControl
             sx={{
@@ -88,7 +88,7 @@ export const UserForm = ({ dataUser }) => {
             }}
           >
             <InputLabel htmlFor="email">Your Email</InputLabel>
-            <Input id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <Input id="email" name="email" value={email} onChange={handleChange} />
           </FormControl>
           <FormControl
             sx={{
@@ -97,7 +97,7 @@ export const UserForm = ({ dataUser }) => {
             }}
           >
             <InputLabel htmlFor="city">Your City</InputLabel>
-            <Input id="city" value={city} onChange={(e) => setCity(e.target.value)} />
+            <Input id="city" name="city" value={city} onChange={handleChange} />
           </FormControl>
           <FormControl
             sx={{
@@ -106,7 +106,7 @@ export const UserForm = ({ dataUser }) => {
             }}
           >
             <InputLabel htmlFor="username">Your Username</InputLabel>
-            <Input id="username" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <Input id="username" name="username" value={username} onChange={handleChange} />
           </FormControl>
           <FormControl
             sx={{
@@ -115,7 +115,7 @@ export const UserForm = ({ dataUser }) => {
             }}
           >
             <InputLabel htmlFor="website">Your Website</InputLabel>
-            <Input id="website" value={website} onChange={(e) => setWebsite(e.target.value)} />
+            <Input id="website" name="website" value={website} onChange={handleChange} />
           </FormControl>
           <ButtonGroup variant="contained" color="primary">
             <Button type="submit" onClick={handleSubmit}>
